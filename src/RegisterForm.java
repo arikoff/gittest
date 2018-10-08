@@ -35,15 +35,17 @@ public class RegisterForm<string> extends JFrame {
                     return;
                 }
 
-                DbStuff db = new DbStuff();
+                if (Launch.db == null) {
+                    Launch.db = new DbStuff();
+                }
                 String login = tfLogin.getText();
-                boolean success = db.checkLogin(login);
+                boolean success = Launch.db.checkLogin(login);
                 if (success) {
                     labelError.setText("Login already exists!");
                     labelError.setVisible(true);
                     return;
                 }
-                success = db.Register(login, pass);
+                success = Launch.db.Register(login, pass);
                 if (success) {
                     dispose();
                     new RegComplete();

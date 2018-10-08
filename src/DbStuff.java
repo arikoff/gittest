@@ -95,4 +95,13 @@ public class DbStuff {
         }
         return false;
     }
+    public void CloseConnection(){
+        try {
+            con.close();
+        }
+        catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

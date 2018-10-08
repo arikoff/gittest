@@ -26,9 +26,11 @@ public class AuthForm<string> extends JFrame{
         bLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DbStuff db = new DbStuff();
+                if (Launch.db == null) {
+                    Launch.db = new DbStuff();
+                }
                 String pass = pfPassword.getText();
-                boolean success = db.checkLogin(tfLogin.getText(),pass );
+                boolean success = Launch.db.checkLogin(tfLogin.getText(),pass );
                 if (success){
                     dispose();
                     new AppWindow();
@@ -49,6 +51,7 @@ public class AuthForm<string> extends JFrame{
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Launch.db.CloseConnection();
                 dispose();
                 System.exit(0);
             }
